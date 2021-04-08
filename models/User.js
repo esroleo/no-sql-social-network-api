@@ -1,27 +1,27 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
 
-const FriendSchema = new Schema(
 
-    {
-        // set custom id to avoid confusion with parent comment _id
-           friendId: {
-               type: Schema.Types.ObjectId,
-               default: () => new Types.ObjectId()
-           },
-           friendName: {
-               type: String,
-               trim: true
-           }
-       },
-       { // alows to user getters (which is what we have date format)
-           toJSON: {
-               virtuals: true,
-               getters: true
-           }
-       }
+// const FriendSchema = new Schema(
 
-)
+//     {
+//         // set custom id to avoid confusion with parent comment _id
+//            friendId: {
+//                type: Schema.Types.ObjectId,
+//                default: () => new Types.ObjectId()
+//            },
+//            friendName: {
+//                type: String,
+//                trim: true
+//            }
+//        },
+//        { // alows to user getters (which is what we have date format)
+//            toJSON: {
+//                virtuals: true,
+//                getters: true
+//            }
+//        }
+
+// )
 
 const UserSchema = new Schema(
     {
@@ -38,21 +38,19 @@ const UserSchema = new Schema(
         match: [/.+@.+\..+/, 'Please enter a valid e-mail address']
         
       },
-      size: {
-        type: String,
-        // enumerable iterated over
-        enum: ['Personal', 'Small', 'Medium', 'Large', 'Extra Large'],
-        default: 'Large'
-      },
-      toppings: []
-      ,
       thoughts: [ 
         {
           type: Schema.Types.ObjectId, // the data is stored as an object
           ref: 'Thought' // defined here to map to Thought model
         }
       ],
-      friends: [FriendSchema],
+      //friends: [FriendSchema],
+      friends: [ // self reference
+                {
+          type: Schema.Types.ObjectId, // the data is stored as an object
+          ref: 'User' // defined here to map to User model
+        }
+      ]
     },
     {
       toJSON: { // allow virtuals to be used
