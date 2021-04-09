@@ -82,7 +82,7 @@ const thoughtController = {
         .catch(err => res.status(400).json(err));
       },
 
-      
+      // Add though reaction
       addThoughtReaction({ params, body }, res) {
         console.log(body)
         Thought.findOneAndUpdate(
@@ -102,6 +102,16 @@ const thoughtController = {
             })
             .catch(err => res.json(err));
           },
+            // remove reply
+        deleteThoughtReaction({ params }, res) {
+          Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $pull: { reactions: { reactionID: params.reactionId } } },
+            { new: true }
+            )
+          .then(dbPizzaData => res.json(dbPizzaData))
+          .catch(err => res.json(err));
+      },
 
 
       

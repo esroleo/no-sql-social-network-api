@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const ReactionSchema = new Schema(
@@ -73,10 +73,10 @@ ThoughtSchema.virtual('friendCount').get(function() {
     return this.reactions.length;
 });
 
-  // create the Pizza model using the PizzaSchema
-  const Thought = model('Thought', ThoughtSchema);
+// create the Pizza model using the PizzaSchema
+const Thought = model('Thought', ThoughtSchema);
 
-  // export the Pizza model
-  module.exports = Thought;
+// export the Pizza model
+module.exports = Thought;
 
 
