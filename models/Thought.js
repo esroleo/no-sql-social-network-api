@@ -33,14 +33,11 @@ const ReactionSchema = new Schema(
   );
 
 
-
-
 const ThoughtSchema = new Schema(
     {
       thoughtText: {
         type: String,
         required: 'You need to provide a pizza name!',
-        trim: true,
         minLength: 1,
         maxLength: 280
       },
@@ -49,7 +46,12 @@ const ThoughtSchema = new Schema(
         default: Date.now,
         get: (createdAtVal) => dateFormat(createdAtVal)
       },
-      writtenBy: {
+      username: {
+        type: String,
+        required: 'Who wrote the thought?',
+        trim: true
+     },
+      userId: {
         type: String,
         required: 'Who wrote the thought?',
         trim: true

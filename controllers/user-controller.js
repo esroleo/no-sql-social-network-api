@@ -79,6 +79,49 @@ const userController = {
             res.json(dbUserData);
         })
         .catch(err => res.status(400).json(err));
+    },
+    // add Friend
+    addFriend({ params, body }, res) {
+      //console.log(body);
+      console.log(params)
+        User.findOneAndUpdate(
+          { _id: params.userID },
+          //{ $push: { friends: _id } },
+          //{ $push: { friends: { friendID: params.friendID } } },
+          { $push: { friends: params.friendID } },
+          { new: true }
+        )
+        .then(dbUserData => {
+        if (!dbUserData) {
+          res.status(404).json({ message: 'No pizza found with this id!' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => res.json(err));
+    },
+          // remove comment and then remove it from the pizza.
+      deleteFriend({ params }, res) {
+      User.findOneAndDelete({ _id: params.commentId })
+        .then(deletedComment => {
+          if (!deletedComment) {
+            return res.status(404).json({ message: 'No comment with this id!' });
+          }
+          return Pizza.findOneAndUpdate(
+            { _id: params.pizzaId },
+            // pull removed the id from the comments array
+            { $pull: { comments: params.commentId } },
+            { new: true }
+          );
+        })
+        .then(dbPizzaData => {
+          if (!dbPizzaData) {
+            res.status(404).json({ message: 'No pizza found with this id!' });
+            return;
+          }
+          res.json(dbPizzaData);
+        })
+        .catch(err => res.json(err));
     }
   }
 
