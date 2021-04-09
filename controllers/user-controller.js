@@ -24,11 +24,11 @@ const userController = {
     // get one User by id
     getUserById({ params }, res) { // params deconstructed
       User.findOne({ _id: params.id })
-        .populate({
+        .populate({ // populate the array of objects and do not include the version field
           path: 'thoughts',
           select: '-__v'
         })
-        .select('-__v')
+        .select('-__v') // do not include User version field
         .then(dbUserData => {
           // If no User is found, send 404
           if (!dbUserData) {
@@ -48,8 +48,6 @@ const userController = {
             .then(dbUserData => res.json(dbUserData))
         .catch(err => res.status(400).json(err));
      },
-     // update User by id
-    // update User by id
     /*
     Mongoose only executes the validators automatically 
     when we actually create new data. This means that a 
@@ -72,23 +70,15 @@ const userController = {
         })
         .catch(err => res.status(400).json(err));
     },
-    // delete User
     deleteUser({ params }, res) {
-      // User.findOneAndUpdate(
-      //   { _id: params.id },
-      //   { $pull: { thoughts: { userId: params.id } } },
-      //   //{ new: true }
-      //   )
-      Thought.deleteMany(
+      Thought.deleteMany( // Delete all thoughts related to an user collection first
         { userId: params.id },
-       // { $pull: { thoughts: { userId: params.id } } },
-        //{ new: true }
         )
         .then(deletedComment => {
           if (!deletedComment) {
-            return res.status(404).json({ message: 'No comment with this id!' });
+            return res.status(404).json({ message: 'No user found with this id!' });
           }
-        return User.findOneAndDelete(
+        return User.findOneAndDelete( // once the deletion of the users thoughts is done, delete the user from the User collection
           { _id: params.id }
           )
         })
@@ -97,54 +87,23 @@ const userController = {
             res.status(404).json({ message: 'No User found with this id!' });
             return;
             }
-            // return Thought.deleteMany(
-            //   //{ _id: params.id },
-            //   { userId: params.id },
-            //   // pull removed the id from the comments array
-            //  // { $pull: { comments: params.commentId } },
-            //   { new: true }
-            // );
             res.json(dbUserData);
         })
         .catch(err => res.status(400).json(err));
     },
-        // remove comment and then remove it from the pizza.
-      deleteFriend({ params }, res) {
-      User.findOneAndDelete({ _id: params.commentId })
-        .then(deletedComment => {
-          if (!deletedComment) {
-            return res.status(404).json({ message: 'No comment with this id!' });
-          }
-          return Pizza.findOneAndUpdate(
-            { _id: params.pizzaId },
-            // pull removed the id from the comments array
-            { $pull: { comments: params.commentId } },
-            { new: true }
-          );
-        })
-        .then(dbPizzaData => {
-          if (!dbPizzaData) {
-            res.status(404).json({ message: 'No pizza found with this id!' });
-            return;
-          }
-          res.json(dbPizzaData);
-        })
-        .catch(err => res.json(err));
-    },
     // add friend
     addFriend({ params, body }, res) {
-      User.findOneAndUpdate(
+      User.findOneAndUpdate( // pass the friend ID into the friends collection (self join)
               { _id: params.userId },
-              //replies: body will update replies model inside comments
               { $push: { friends: params.friendId } }, 
               { new: true, runValidators: true }
           )
-          .then(dbPizzaData => {
-              if (!dbPizzaData) {
-                  res.status(404).json({ message: 'No pizza found with this id!' });
+          .then(dbUserData => {
+              if (!dbUserData) {
+                  res.status(404).json({ message: 'No user found with this id!' });
                   return;
               }
-              res.json(dbPizzaData);
+              res.json(dbUserData);
           })
           .catch(err => res.json(err));
       },
@@ -152,16 +111,15 @@ const userController = {
       removeFriend({ params, body }, res) {
         User.findOneAndUpdate(
                 { _id: params.userId },
-                //replies: body will update replies model inside comments
                 { $pull: { friends: params.friendId } }, 
                 { new: true, runValidators: true }
             )
-            .then(dbPizzaData => {
-                if (!dbPizzaData) {
-                    res.status(404).json({ message: 'No pizza found with this id!' });
+            .then(dbUserData => {
+                if (!dbUserData) {
+                    res.status(404).json({ message: 'No user found with this id!' });
                     return;
                 }
-                res.json(dbPizzaData);
+                res.json(dbUserData);
             })
             .catch(err => res.json(err));
       }

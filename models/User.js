@@ -1,34 +1,11 @@
 const { Schema, model } = require('mongoose');
 
-
-// const FriendSchema = new Schema(
-
-//     {
-//         // set custom id to avoid confusion with parent comment _id
-//            friendId: {
-//                type: Schema.Types.ObjectId,
-//                default: () => new Types.ObjectId()
-//            },
-//            friendName: {
-//                type: String,
-//                trim: true
-//            }
-//        },
-//        { // alows to user getters (which is what we have date format)
-//            toJSON: {
-//                virtuals: true,
-//                getters: true
-//            }
-//        }
-
-// )
-
 const UserSchema = new Schema(
     {
       username: {
         type: String,
         unique: true,
-        required: 'You need to provide a pizza name!',
+        required: 'You need to provide a user name!',
         trim: true
       },
       email: {
@@ -41,10 +18,9 @@ const UserSchema = new Schema(
       thoughts: [ 
         {
           type: Schema.Types.ObjectId, // the data is stored as an object
-          ref: 'Thought' // defined here to map to Thought model
+          ref: 'Thought' // defined here to map to Thought model (Join)
         }
       ],
-      //friends: [FriendSchema],
       friends: [ // self reference
                 {
           type: Schema.Types.ObjectId, // the data is stored as an object
@@ -67,12 +43,10 @@ UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 });
 
+// create the User model using the UserSchema collection
+const User = model('User', UserSchema);
 
-
-  // create the Pizza model using the PizzaSchema
-  const User = model('User', UserSchema);
-
-  // export the Pizza model
-  module.exports = User;
+// export the Pizza model
+module.exports = User;
 
 
