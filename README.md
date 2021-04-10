@@ -17,7 +17,7 @@
 <a name="desc"></a>
 ## 1. Description
 
-This is a back end web application that was build using MongoDB, Mongoose and express js to showcase a no sql network api.
+This is a back end web application that was built using MongoDB, Mongoose and express js to showcase a no sql network api.
 
 ### Major tech snapshot
 
@@ -26,7 +26,7 @@ This is a back end web application that was build using MongoDB, Mongoose and ex
 <a name="web-address"></a>
 ## 2. How to Get There
 
-### Open your favorite code editor (uses git) and run (MongoDB instllation is required):
+### Open your favorite code editor (uses git) and run (MongoDB installation is required):
 
 npm i
 npm start
@@ -43,23 +43,23 @@ https://drive.google.com/file/d/1VMRh78anli1O2lWMK8iXAZh9WsR3Mfeh/view
 #2 - Thought related
 https://drive.google.com/file/d/1j1yV2LdtBCGNNl9-cgAko37sIfmHKGSu/view
 
-#3 - Thought relateed deletion continuation
+#3 - Thought related deletion continuation
 https://drive.google.com/file/d/1INe8VQnQg4KZjoIkBj78cRR-2XgImQ2-/view
 
-#4 - Good bye
+#4 - Goodbye
 https://drive.google.com/file/d/1--VvZ32YYE3-rom_IR0nxmLhNs5uE8uy/view
 
 
-If you want to run locally preform the following:
+If you want to run locally perform the following:
 
-If you are still intersted in running the application you would need to do the following:
+If you are still interested in running the application you would need to do the following:
 * install MongoDb version 4.4.4 as minimum.
 * npm i
 * npm start
 
 Insomnia path are:
 
-* User releated *
+* User related *
 
 Create user: 
 http://localhost:3001/api/users/
@@ -83,7 +83,7 @@ http://localhost:3001/api/users/<recipient userId>/friends/<friend user Id>
 
 * Thoughts related *
 
-New thoght:
+New thought:
 http://localhost:3001/api/thoughts/
 
 json sample:
@@ -109,7 +109,7 @@ http://localhost:3001/api/thoughts/<thoughtId>/reactions/<reactionId>
 <a name="features"></a>
 ## 4. Features
 
-Application is running fully in back end, all features are associated to insomnia. Please revisit usage tips for more information.
+Application is running fully in the back end, all features are associated with insomnia. Please revisit usage tips for more information.
 
 <a name="credits"></a>
 ## 5. Credits
@@ -132,7 +132,7 @@ npm i
 <a name="commandTest"></a>
 ## 8. Test Command
 
-No test commands avaialble, if you would like any, please let me know.
+No test commands available, if you would like any, please let me know.
 
 <a name="contributing"></a>
 ## 9. Contributing
@@ -147,8 +147,3 @@ Please reach out to me
 GitHub Url: https://github.com/esroleo
 
 Email address: esroleo@gmail.com
-
-
-
-
-
