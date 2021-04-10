@@ -21,7 +21,7 @@ This is a back end web application that was build using MongoDB, Mongoose and ex
 
 ### Major tech snapshot
 
-![tech](./assets/images/code-used.JPG?raw=true "code-used.JPG")
+![tech](./assets/images/tech-used.JPG?raw=true "tech-used.JPG")
 
 <a name="web-address"></a>
 ## 2. How to Get There
