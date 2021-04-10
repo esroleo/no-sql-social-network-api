@@ -36,6 +36,8 @@ npm start
 ## 3. Usage Tips
 
 For more information - Please visit the following videos on how the application works and some background information.
+Please note that on my first video I said 2 videos, but it turns out there is a more information that can be contain in 5 minutes videos :).
+FYI - Currently I have the free version so I am constraint to 5 min videos :)
 
 #1 - User related
 https://drive.google.com/file/d/1VMRh78anli1O2lWMK8iXAZh9WsR3Mfeh/view
